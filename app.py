@@ -1,9 +1,9 @@
 def wsgi_app(environ, start_response):
     status = '200 OK'
-    response_headers = [('Content-type', 'text/plain')]
+    response_headers = [('Content-type', 'text/html')]
     start_response(status, response_headers)
-    return '<button></button>'
-    #yield response_body.encode()
+    response_body = '<input></input><button>Get!</button>'
+    yield response_body.encode()
 
 if __name__ == '__main__':
     from wsgiref.simple_server import make_server
