@@ -1,3 +1,4 @@
+import optparse
 import xml.etree.ElementTree as ET
 def ip_check_Azure(ip):
     tree = ET.parse('ip_ranges_Azure.xml')
@@ -18,9 +19,9 @@ def ip_check_Azure(ip):
                     if x[j]==range_azure[j]:
                         match+=1
                 if match >= 3:
-                    print "Hoster is Microsoft Azure."
+                    return "Hoster is Microsoft Azure."            
     else:
-        print "Incorrect data! Please, type again."
+        return "Incorrect data! Please, type again."
 
 def ip_check_Amazon(ip):
     tree = ET.parse('ip_ranges_Amazon.xml')
@@ -43,14 +44,9 @@ def ip_check_Amazon(ip):
                             if x[j]==range_amazon[j]:
                                 match+=1
                         if match >= 3:
-                            print "Hoster is Amazon Web Services."
+                            return "Hoster is Amazon Web Services."
     else:
-        print "Incorrect data! Please, type again."
-    
-while True:       
-    ip = raw_input('Enter IP to find a host: ')
-    ip_check_Azure(ip)
-    ip_check_Amazon(ip)
+        return "Incorrect data! Please, type again."
 
 
                     
