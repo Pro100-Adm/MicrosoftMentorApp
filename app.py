@@ -1,6 +1,6 @@
 from cgi import parse_qs
 import test
-html = '<form method="get"><input name="ip"></input><button>Get!</button></form>'
+html = '<form method="get"><input name="ip"></input><button>Get!</button></form> Enter IP to find hoster (e.g. 192.168.0.0).'
 def wsgi_app(environ, start_response):
     status = '200 OK'
     d = parse_qs(environ['QUERY_STRING'])
@@ -12,11 +12,11 @@ def wsgi_app(environ, start_response):
     if ip:
         response_headers = [('Content-type', 'text/html')]
         if test.ip_check_Azure(x[0]):
-            response_body = test.ip_check_Azure(x[0])
+            response_body = test.ip_check_Azure(x[0])+'<form><button>Go Back</button></form>'
         elif test.ip_check_Amazon(x[0]):
-            response_body = test.ip_check_Amazon(x[0])
+            response_body = test.ip_check_Amazon(x[0])+'<form><button>Go Back</button></form>'
         else:
-            response_body = 'Not Found!'
+            response_body = 'Not Found!'+'<form><button>Go Back</button></form>'
     else:
         response_headers = [('Content-type', 'text/html')]
         response_body = html
